@@ -45,15 +45,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Building..'
-                sh 'ls'
-                echo GIT_COMMIT
-                echo GIT_REPO_NAME
-                echo ecr_registry
-                script {
-                    docker.withRegistry( 'https://115.112.75.210:5006', registryCredential ) {
-                        dockerImg =  docker.build("${GIT_REPO_NAME}:${GIT_COMMIT}", "./") 
-                    }
-                }
+                
             }
         }
          stage('Confirm for unit tests') {
@@ -88,73 +80,6 @@ pipeline {
         }
         
         
-        // stage('ECR Push'){
-        //     steps{
-        //         // sh 'rm  ~/.dockercfg || true'
-        //         // sh 'rm ~/.docker/config.json || true'
-        //         // [url: "https://536703334988.dkr.ecr.ap-southeast-2.amazonaws.com/test-repository",credentialsId: "ecr:ap-southeast-2:demo-ecr-credentials"]
-        //         script {
-        //             docker.withRegistry("https://${ecr_registry}", ecr_cred ) {
-        //                 // dockerImg.push("${GIT_REPO_NAME}:${GIT_COMMIT}")
-        //                 sh "docker tag ${GIT_REPO_NAME}:${GIT_COMMIT} ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
-        //                 sh "docker push ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
-
-        //             }
-        //         }
-        //         // script {
-        //         // sh 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 817969892253.dkr.ecr.us-west-2.amazonaws.com'
-        //         // sh "docker push ${GIT_REPO_NAME}:${GIT_COMMIT}" 
-        //         // }
-        //     }
-        // }
-
-        // stage('Image Name Change') {
-        //     steps{
-        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile} || true"
-        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile_staging} || true"
-        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile_prod} || true"
-        //         // echo imageSedReplace
-        //         // sh "cat ${kubectlFile}"
-        //     }
-        // }
         
-        // stage('Deploy') {
-        //     steps{
-        //         script {
-        //             if (user_env_input == "Production") {
-        //                 echo 'master branch'
-        //             } else if (user_env_input == "Testing") {
-        //                 echo 'staging branch'
-        //                 kubernetesDeploy(
-        //                     configs: kubectlFile_staging,
-        //                     kubeconfigId: kube_cred,
-        //                     enableConfigSubstitution: true
-        //                 )  
-        //             } else {
-        //                 echo 'dev branch'
-        //                 kubernetesDeploy(
-        //                     configs: kubectlFile,
-        //                     kubeconfigId: kube_cred,
-        //                     enableConfigSubstitution: true
-        //                 )  
-        //             }
-        //         }
-        //     }                    
-        // }
-        
-        
-        
-        // stage('Remove Local Image') {
-        //     steps{
-        //         // echo "Remove"
-        //         script{
-        //             docker.withRegistry( 'https://115.112.75.210:5006', registryCredential ) {
-        //                 sh "docker rmi ${GIT_REPO_NAME}:${GIT_COMMIT}"
-        //                 sh "docker rmi ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
-        //                 sh 'docker rmi $(docker images -f "dangling=true" -q ) || true'
-        //             }               
-        //         }              
-        //     }
-        // }
     }
 }
