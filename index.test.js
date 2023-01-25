@@ -1,6 +1,6 @@
 //const app = require("../server");
 const app=require("../index")
-// const index = require('../index.js')
+// const index = require('./index.js')
  const supertest = require('supertest');
 // const request = supertest(index);
 
