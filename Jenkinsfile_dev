@@ -14,7 +14,7 @@ pipeline {
         kubectlFile_prod = "deployment_prod.yaml"
         kube_cred = "k8s-dev"
         kube_cred_prod = "k8s-prod"
-
+         CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
         PROD_BRANCH = "master"
         STAGING_BRANCH = "staging"
         user_env_input = "Development"
