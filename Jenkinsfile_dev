@@ -1,0 +1,160 @@
+pipeline {
+    environment { 
+        registryCredential = 'docker_nexus'
+        GIT_REPO_NAME = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1') 
+        dockerImg = ""
+        ecr_registry = "817969892253.dkr.ecr.us-west-2.amazonaws.com"
+        ecr_cred = 'ecr:us-west-2:ecr_cred'
+        ecr_eks = 'aws:us-west-2:ecr_eks'
+        // eks_cred = 'eks-manager'
+        eks_url = 'https://C2C0AC336FF98838305F8AE6CA78639A.gr7.us-west-2.eks.amazonaws.com'
+        imageSedReplace = "${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
+        kubectlFile = "deployment.yaml"
+        kubectlFile_staging = "deployment_staging.yaml"
+        kubectlFile_prod = "deployment_prod.yaml"
+        kube_cred = "k8s-dev"
+        kube_cred_prod = "k8s-prod"
+
+        PROD_BRANCH = "master"
+        STAGING_BRANCH = "staging"
+        user_env_input = "Development"
+
+    }
+    agent any
+    tools{
+     nodejs 'NODEJS'
+    }
+    stages {
+        stage('Which environment to build?') {
+            steps {
+                script {
+                    def userInput = input(id: 'userInput', message: 'Deploy to?',
+                    parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'Development', 
+                        description:'Environment choices', name:'denv', choices: "Development\nProduction\nTesting"]
+                    ])
+                    user_env_input = userInput
+                    //Use this value to branch to different logic if needed
+                }
+            }
+        }
+        stage('Confirm') {
+            steps {
+                input("Do you want to proceed building in ${user_env_input} environment?")
+            }
+        }       
+        stage('Docker Build') {
+            steps {
+                echo 'Building..'
+                sh 'ls'
+                echo GIT_COMMIT
+                echo GIT_REPO_NAME
+                echo ecr_registry
+                script {
+                    docker.withRegistry( 'https://115.112.75.210:5006', registryCredential ) {
+                        dockerImg =  docker.build("${GIT_REPO_NAME}:${GIT_COMMIT}", "./") 
+                    }
+                }
+            }
+        }
+         stage('Confirm for unit tests') {
+            steps {
+                 
+               script{
+                   def is_unit_test_continue_parameter = input(id: 'is_unit_test_continue', message: 'Do you want to go for unit tests and jacoco reports?',
+                    parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'No',
+                        description:'Unit Test choices', name:'unit tests  report', choices: 'Yes\nNo']
+                    ])
+                    
+                   
+                    is_unit_test_continue=is_unit_test_continue_parameter
+
+
+                  
+
+               }}}
+        stage('Unit Tests') {
+            when {
+         expression { is_unit_test_continue == "Yes" }
+        }
+     steps {
+         echo "Hello,unit_test continue...!"
+            script {
+                sh 'npm config ls'
+                sh 'npm test'
+                echo 'testing in progess...'
+                
+            }
+        }
+        }
+        
+        
+        // stage('ECR Push'){
+        //     steps{
+        //         // sh 'rm  ~/.dockercfg || true'
+        //         // sh 'rm ~/.docker/config.json || true'
+        //         // [url: "https://536703334988.dkr.ecr.ap-southeast-2.amazonaws.com/test-repository",credentialsId: "ecr:ap-southeast-2:demo-ecr-credentials"]
+        //         script {
+        //             docker.withRegistry("https://${ecr_registry}", ecr_cred ) {
+        //                 // dockerImg.push("${GIT_REPO_NAME}:${GIT_COMMIT}")
+        //                 sh "docker tag ${GIT_REPO_NAME}:${GIT_COMMIT} ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
+        //                 sh "docker push ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
+
+        //             }
+        //         }
+        //         // script {
+        //         // sh 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 817969892253.dkr.ecr.us-west-2.amazonaws.com'
+        //         // sh "docker push ${GIT_REPO_NAME}:${GIT_COMMIT}" 
+        //         // }
+        //     }
+        // }
+
+        // stage('Image Name Change') {
+        //     steps{
+        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile} || true"
+        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile_staging} || true"
+        //         sh "sed -i 's|image_placeholder_name|${imageSedReplace}|g' ${kubectlFile_prod} || true"
+        //         // echo imageSedReplace
+        //         // sh "cat ${kubectlFile}"
+        //     }
+        // }
+        
+        // stage('Deploy') {
+        //     steps{
+        //         script {
+        //             if (user_env_input == "Production") {
+        //                 echo 'master branch'
+        //             } else if (user_env_input == "Testing") {
+        //                 echo 'staging branch'
+        //                 kubernetesDeploy(
+        //                     configs: kubectlFile_staging,
+        //                     kubeconfigId: kube_cred,
+        //                     enableConfigSubstitution: true
+        //                 )  
+        //             } else {
+        //                 echo 'dev branch'
+        //                 kubernetesDeploy(
+        //                     configs: kubectlFile,
+        //                     kubeconfigId: kube_cred,
+        //                     enableConfigSubstitution: true
+        //                 )  
+        //             }
+        //         }
+        //     }                    
+        // }
+        
+        
+        
+        // stage('Remove Local Image') {
+        //     steps{
+        //         // echo "Remove"
+        //         script{
+        //             docker.withRegistry( 'https://115.112.75.210:5006', registryCredential ) {
+        //                 sh "docker rmi ${GIT_REPO_NAME}:${GIT_COMMIT}"
+        //                 sh "docker rmi ${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
+        //                 sh 'docker rmi $(docker images -f "dangling=true" -q ) || true'
+        //             }               
+        //         }              
+        //     }
+        // }
+    }
+}
