@@ -71,8 +71,13 @@ pipeline {
      steps {
          echo "Hello,unit_test continue...!"
             script {
-                sh 'npm config ls'
-                sh 'npm test'
+                  echo "Current workspace is ${env.WORKSPACE}"
+                  echo "Current workspace is $WORKSPACE"
+                   echo "Current workspace is ../$WORKSPACE/config"
+                   //sh 'cd $WORKSPACE/'
+                sh 'npm i jest superset'
+                sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
+                sh 'npx jest --forceExit'
                 echo 'testing in progess...'
                 
             }
