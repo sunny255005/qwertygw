@@ -79,7 +79,7 @@ pipeline {
 //   -Dsonar.host.url=http://localhost:9000 \
 //   -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
 
-withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token){
+withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token'){
                     
 
                      
