@@ -72,13 +72,89 @@ pipeline {
         stage("Sonarqube")
         {
             steps {
-            sh 'sonarqube-server \
+                script{
+//             sh 'sonarqube-server \
+//   -Dsonar.projectKey=qwerty \
+//   -Dsonar.sources=. \
+//   -Dsonar.host.url=http://localhost:9000 \
+//   -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
+
+withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token){
+                    
+
+                     
+                     sh'sonarqube-server  -Dsonar.projectKey=qwerty  -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
+                    
+                }
+            }
+
+        }
+
+
+
+
+         stage('Confirm for Sonarqube Check') {
+            steps {
+                 
+               script{
+                   def is_sonarqube_parameter = input(id: 'is_sonarqube', message: 'Do you want to continue with Sonarqube?',
+                    parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'No',
+                        description:'Sonarqube choices', name:'sonarqube_choice_params', choices: 'Yes\nNo']
+                    ])
+                    
+                   
+                   is_sonarqube=is_sonarqube_parameter
+
+
+                  
+
+               }}}
+
+
+                stage('Sonarqube Integeration') {
+            when {
+         expression { is_sonarqube == "Yes" }
+     }
+     steps {
+         echo "Hello,sonarqube continue...!"
+            script {
+               
+    withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token') {
+                    
+ 
+
+ sh 'sonarqube-server \
   -Dsonar.projectKey=qwerty \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
   -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
+                   
+                    
+                }
+
+//   timeout(time: 1, unit: 'MINUTES') {  
+//     def qg = waitForQualityGate() 
+//     if (qg.status != 'OK') {
+//       error "Pipeline aborted due to quality gate failure: ${qg.status}"
+//     }
+//   }
+                  
+                
+                        
+                        
+                    
+            }
+          
         }
-        } 
+                 
+                  
+
+ 
+  
+
+           
+                }
+     
         
         
     }
