@@ -101,7 +101,7 @@ pipeline {
                     
  
 
- sh 'sonarqube-server \
+ sh 'sonar-4.7 \
   -Dsonar.projectKey=qwerty \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
