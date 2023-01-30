@@ -8,7 +8,7 @@ pipeline {
     agent any
     tools{
      nodejs 'NODEJS'
-     sonarQube 'SonarQube Scanner 4.7.0.2747'
+  
     }
     stages {
         stage('Which environment to build?') {
@@ -97,10 +97,10 @@ pipeline {
      steps {
          echo "Hello,sonarqube continue...!"
             script {
-               
+               scannerHome = tool 'SonarQube Scanner 4.7.0.2747'
     withSonarQubeEnv('sonarqube-server') {
-                    
- sh 'sonar-scanner'
+                     sh "${scannerHome}/bin/sonar-scanner"
+ //sh 'sonar-scanner'
 
  //sh ' -Dsonar.projectKey=qwerty \
   //-Dsonar.sources=. \
