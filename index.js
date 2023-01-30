@@ -83,42 +83,42 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // import modules
-const { authorize } = require("./middleware/authorize");
-const helper = require('./helpers/helper');
-const authRoutes = require("./routers/V2/auth")(logger);
-const authRoutesV3 = require("./routers/V3/auth")(logger);
-const pagesRoutes = require("./routers/V2/webmaster/pages")(authorize, logger);
-const sectionsRoutes = require("./routers/V2/webmaster/sections")(authorize, logger);
-const organizationRoutes = require("./routers/V2/webmaster/organizations")(authorize, logger);
-const dataStoreRoutes = require("./routers/V2/webmaster/datastore")(authorize, logger);
-const rolesRoutes = require("./routers/V2/user-management/roles")(authorize, logger);
-const teamsRoutes = require("./routers/V2/user-management/teams")(authorize, logger);
-const usersRoutes = require("./routers/V2/user-management/users")(authorize, logger);
+// const { authorize } = require("./middleware/authorize");
+// const helper = require('./helpers/helper');
+// const authRoutes = require("./routers/V2/auth")(logger);
+// const authRoutesV3 = require("./routers/V3/auth")(logger);
+// const pagesRoutes = require("./routers/V2/webmaster/pages")(authorize, logger);
+// const sectionsRoutes = require("./routers/V2/webmaster/sections")(authorize, logger);
+// const organizationRoutes = require("./routers/V2/webmaster/organizations")(authorize, logger);
+// const dataStoreRoutes = require("./routers/V2/webmaster/datastore")(authorize, logger);
+// const rolesRoutes = require("./routers/V2/user-management/roles")(authorize, logger);
+// const teamsRoutes = require("./routers/V2/user-management/teams")(authorize, logger);
+// const usersRoutes = require("./routers/V2/user-management/users")(authorize, logger);
 
-const rolesRoutesV3 = require("./routers/V3/user-management/roles")(authorize, logger);
-const teamsRoutesV3 = require("./routers/V3/user-management/teams")(authorize, logger);
-const usersRoutesV3 = require("./routers/V3/user-management/users")(authorize, logger);
+// const rolesRoutesV3 = require("./routers/V3/user-management/roles")(authorize, logger);
+// const teamsRoutesV3 = require("./routers/V3/user-management/teams")(authorize, logger);
+// const usersRoutesV3 = require("./routers/V3/user-management/users")(authorize, logger);
 
-const featureRoutes = require("./routers/V2/operation-management/feature")(logger)
+// const featureRoutes = require("./routers/V2/operation-management/feature")(logger)
 
-const reportingRoutes = require("./routers/V2/reporting/report")(authorize,logger);
-const internalRoutes = require("./routers/V2/internal-apis")(logger);
-const rulesRoutes = require("./routers/V2/operation-management/rules")(authorize, logger);
-const momentRoutes = require("./routers/V3/operation-management/rules")(authorize, logger)
-const tasksRoutes = require("./routers/V2/operation-management/tasks")(authorize, logger)
-const configRoutes = require("./routers/V2/operation-management/configuration")(authorize,logger);
+// const reportingRoutes = require("./routers/V2/reporting/report")(authorize,logger);
+// const internalRoutes = require("./routers/V2/internal-apis")(logger);
+// const rulesRoutes = require("./routers/V2/operation-management/rules")(authorize, logger);
+// const momentRoutes = require("./routers/V3/operation-management/rules")(authorize, logger)
+// const tasksRoutes = require("./routers/V2/operation-management/tasks")(authorize, logger)
+// const configRoutes = require("./routers/V2/operation-management/configuration")(authorize,logger);
 
-const metadataRoutes = require("./routers/V2/metadata/metadata")(authorize, logger);
-const interactionsRoutes = require("./routers/V2/metadata/interactions")(authorize, logger);
-const interactionsV3Routes=require("./routers/V3/interactions/interactions")(authorize, logger);
-const analyzeRoutes=require("./routers/V3/analyze/analyze")(authorize, logger);
-const rtaInteractionsRoutes = require("./routers/V2/metadata/rtainteractions")(authorize, logger);
-const qcFormsRoutes = require("./routers/V2/qc-forms/qc-forms")(authorize,logger);
-const assignmentRoutes = require("./routers/V2/assignment/assignment")(authorize,logger);
-const passwordPolicyRoutes = require("./routers/V2/operation-management/password-policy")(authorize,logger);
+// const metadataRoutes = require("./routers/V2/metadata/metadata")(authorize, logger);
+// const interactionsRoutes = require("./routers/V2/metadata/interactions")(authorize, logger);
+// const interactionsV3Routes=require("./routers/V3/interactions/interactions")(authorize, logger);
+// const analyzeRoutes=require("./routers/V3/analyze/analyze")(authorize, logger);
+// const rtaInteractionsRoutes = require("./routers/V2/metadata/rtainteractions")(authorize, logger);
+// const qcFormsRoutes = require("./routers/V2/qc-forms/qc-forms")(authorize,logger);
+// const assignmentRoutes = require("./routers/V2/assignment/assignment")(authorize,logger);
+// const passwordPolicyRoutes = require("./routers/V2/operation-management/password-policy")(authorize,logger);
 
 //V3 ROUTES
-const apiListRoutesV3 = require("./routers/V3/webmaster/apis")(authorize, logger);
+// /const apiListRoutesV3 = require("./routers/V3/webmaster/apis")(authorize, logger);
 
 // define api router path
 /**
@@ -186,8 +186,8 @@ const apiListRoutesV3 = require("./routers/V3/webmaster/apis")(authorize, logger
  *     responses:
  * 
  */
-app.use("/v2/auth/", authRoutes);
-app.use("/v3/auth/", authRoutesV3);
+//app.use("/v2/auth/", authRoutes);
+//app.use("/v3/auth/", authRoutesV3);
 /**
  * @swagger
  *   /v2/page-management/pages/:
@@ -202,8 +202,8 @@ app.use("/v3/auth/", authRoutesV3);
  *         - pages
  *       responses:
  */
-app.use("/v2/page-management/pages/", pagesRoutes);
-app.use("/v3/page-management/pages/", pagesRoutes);
+//app.use("/v2/page-management/pages/", pagesRoutes);
+//app.use("/v3/page-management/pages/", pagesRoutes);
 /**
  * @swagger
  *   /v2/page-management/sections/:
@@ -218,8 +218,8 @@ app.use("/v3/page-management/pages/", pagesRoutes);
  *         - sections
  *       responses:
  */
-app.use("/v2/page-management/sections/", sectionsRoutes);
-app.use("/v3/page-management/sections/", sectionsRoutes);
+//app.use("/v2/page-management/sections/", sectionsRoutes);
+//app.use("/v3/page-management/sections/", sectionsRoutes);
 /**
  * @swagger
  *   /v2/organizations/:
@@ -234,7 +234,7 @@ app.use("/v3/page-management/sections/", sectionsRoutes);
  *         - organizations
  *       responses:
  */
-app.use("/v2/organizations/", organizationRoutes);
+//app.use("/v2/organizations/", organizationRoutes);
 /**
  * @swagger
  *   /v2/datastore/:
@@ -249,7 +249,7 @@ app.use("/v2/organizations/", organizationRoutes);
  *         - data store
  *       responses:
  */
-app.use("/v2/datastore/", dataStoreRoutes);
+//app.use("/v2/datastore/", dataStoreRoutes);
 /**
  * @swagger
  *   /v2/user-management/organizations/:
@@ -264,8 +264,8 @@ app.use("/v2/datastore/", dataStoreRoutes);
  *         - roles
  *       responses:
  */
-app.use("/v2/user-management/organizations/", rolesRoutes);
-app.use("/v3/user-management/organizations/", rolesRoutesV3);
+//app.use("/v2/user-management/organizations/", rolesRoutes);
+//app.use("/v3/user-management/organizations/", rolesRoutesV3);
 // app.use("/api/v2/user-management/roles", rolesRoutes);
 /**
  * @swagger
@@ -281,8 +281,8 @@ app.use("/v3/user-management/organizations/", rolesRoutesV3);
  *         - users
  *       responses:
  */
-app.use("/v2/user-management/organizations/", usersRoutes);
-app.use("/v3/user-management/organizations/", usersRoutesV3);
+// app.use("/v2/user-management/organizations/", usersRoutes);
+// app.use("/v3/user-management/organizations/", usersRoutesV3);
 /**
  * @swagger
  *   /v2/user-management/organizations/:
@@ -298,8 +298,8 @@ app.use("/v3/user-management/organizations/", usersRoutesV3);
  *       responses:
  */
 
-app.use("/v2/user-management/organizations/", teamsRoutes);
-app.use("/v3/user-management/organizations/", teamsRoutesV3);
+// app.use("/v2/user-management/organizations/", teamsRoutes);
+// app.use("/v3/user-management/organizations/", teamsRoutesV3);
 
 // Operation management - Rules and Tasks APIs
 /**
@@ -316,7 +316,7 @@ app.use("/v3/user-management/organizations/", teamsRoutesV3);
  *         - rules
  *       responses:
  */
-app.use("/v2/operation-management/organizations/", rulesRoutes)
+// app.use("/v2/operation-management/organizations/", rulesRoutes)
 /**
  * @swagger
  *   /v2/operation-management/organizations/:
@@ -331,7 +331,7 @@ app.use("/v2/operation-management/organizations/", rulesRoutes)
  *         - tasks
  *       responses:
  */
-app.use("/v2/operation-management/organizations/", tasksRoutes)
+// app.use("/v2/operation-management/organizations/", tasksRoutes)
 /**
  * @swagger
  *   /v2/operation-management/organizations/:
@@ -346,7 +346,7 @@ app.use("/v2/operation-management/organizations/", tasksRoutes)
  *         - qc form
  *       responses:
  */
-app.use("/v2/operation-management/organizations/", qcFormsRoutes);
+// app.use("/v2/operation-management/organizations/", qcFormsRoutes);
 
 /**
  * @swagger
@@ -363,7 +363,7 @@ app.use("/v2/operation-management/organizations/", qcFormsRoutes);
  *       responses:
  */
 
-app.use("/v2/configuration-management/organizations/", configRoutes) /// v2/configuration-management/organizations/
+//app.use("/v2/configuration-management/organizations/", configRoutes) /// v2/configuration-management/organizations/
 /**
  * @swagger
  *   /v2/operation-management/feature:
@@ -374,9 +374,9 @@ app.use("/v2/configuration-management/organizations/", configRoutes) /// v2/conf
  *       responses:
  */
 
-app.use("/v2/configuration-management/organizations/", configRoutes) /// v2/configuration-management/organizations/
-app.use("/v2/configuration-management/organizations/", passwordPolicyRoutes) /// v2/configuration-management/organizations/
-app.use("/v2/operation-management/feature", featureRoutes)
+// app.use("/v2/configuration-management/organizations/", configRoutes) /// v2/configuration-management/organizations/
+// app.use("/v2/configuration-management/organizations/", passwordPolicyRoutes) /// v2/configuration-management/organizations/
+// app.use("/v2/operation-management/feature", featureRoutes)
 
 // Reporting endpoints
 /**
@@ -393,7 +393,7 @@ app.use("/v2/operation-management/feature", featureRoutes)
  *         - reports
  *       responses:
  */
-app.use("/v2/reporting-management/organizations/", reportingRoutes)/// /v2/reporting-management/organizations/:orgId/reports/:reportId/audio-evaluation-detail
+//app.use("/v2/reporting-management/organizations/", reportingRoutes)/// /v2/reporting-management/organizations/:orgId/reports/:reportId/audio-evaluation-detail
 // Reporting endpoints
 /**
  * @swagger
@@ -404,7 +404,7 @@ app.use("/v2/reporting-management/organizations/", reportingRoutes)/// /v2/repor
  *         - assignments
  *       responses:
  */
-app.use("/v2/reporting-management/organizations/", assignmentRoutes);
+//app.use("/v2/reporting-management/organizations/", assignmentRoutes);
 /**
  * @swagger
  *   /internal/v2/reporting-management/organizations/:
@@ -414,7 +414,7 @@ app.use("/v2/reporting-management/organizations/", assignmentRoutes);
  *         - internal report
  *       responses:
  */
-app.use("/internal/v2/reporting-management/organizations/", internalRoutes);
+//app.use("/internal/v2/reporting-management/organizations/", internalRoutes);
 
 // metadata api endpoints
 /**
@@ -426,7 +426,7 @@ app.use("/internal/v2/reporting-management/organizations/", internalRoutes);
  *         - metadata
  *       responses:
  */
-app.use("/v2/access-management/organizations/", metadataRoutes) //v2/access-management/organizations/
+//app.use("/v2/access-management/organizations/", metadataRoutes) //v2/access-management/organizations/
 /**
  * @swagger
  *   /v2/organizations/:
@@ -436,12 +436,12 @@ app.use("/v2/access-management/organizations/", metadataRoutes) //v2/access-mana
  *         - interactions
  *       responses:
  */
-app.use("/v2/organizations/", interactionsRoutes) //cannot change path as clients are using it. in future "v2/access-management/organizations/" will be used
+// app.use("/v2/organizations/", interactionsRoutes) //cannot change path as clients are using it. in future "v2/access-management/organizations/" will be used
 
-app.use("/v2/organizations/", rtaInteractionsRoutes);
-app.use("/v3/operation-management/organizations/", momentRoutes);
-app.use("/v3/organizations/", interactionsV3Routes);
-app.use("/v3/organizations/", analyzeRoutes);
+// app.use("/v2/organizations/", rtaInteractionsRoutes);
+// app.use("/v3/operation-management/organizations/", momentRoutes);
+// app.use("/v3/organizations/", interactionsV3Routes);
+// app.use("/v3/organizations/", analyzeRoutes);
 
 // app.use('/test-encrypt',async function (req, res) {
 //   const argon2 = require('argon2');
@@ -485,7 +485,7 @@ app.use("/v3/organizations/", analyzeRoutes);
 // });
 
 //V3 ROUTEES
-app.use("/v3/page-management/apis", apiListRoutesV3);
+//app.use("/v3/page-management/apis", apiListRoutesV3);
 
 app.use(function (req, res, next) {
   next(createError(404));
