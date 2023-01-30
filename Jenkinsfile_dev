@@ -58,9 +58,7 @@ pipeline {
          echo "Hello,unit_test continue...!"
             script {
                   echo "Current workspace is ${env.WORKSPACE}"
-                  echo "Current workspace is $WORKSPACE"
-                   echo "Current workspace is ../$WORKSPACE/config"
-                   //sh 'cd $WORKSPACE/'
+                 
                 sh 'npm i jest superset'
                 sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
                 sh 'npx jest --forceExit'
@@ -98,24 +96,19 @@ pipeline {
          echo "Hello,sonarqube continue...!"
             script {
                scannerHome = tool 'SonarQube Scanner 4.7.0.2747'
-    withSonarQubeEnv('sonarqube-server') {
+    withSonarQubeEnv(installationName:'sonarqube-server', credentialsId: 'souradip_sonar_token') {
                      sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=qwerty -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e"
- //sh 'sonar-scanner'
-
- //sh ' -Dsonar.projectKey=qwerty \
-  //-Dsonar.sources=. \
-  //-Dsonar.host.url=http://localhost:9000 \
-  //-Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
+ 
                    
                     
                 }
 
-//   timeout(time: 1, unit: 'MINUTES') {  
-//     def qg = waitForQualityGate() 
-//     if (qg.status != 'OK') {
-//       error "Pipeline aborted due to quality gate failure: ${qg.status}"
-//     }
-//   }
+   timeout(time: 1, unit: 'MINUTES') {  
+     def qg = waitForQualityGate() 
+     if (qg.status != 'OK') {
+       error "Pipeline aborted due to quality gate failure: ${qg.status}"
+     }
+     }
                   
                 
                         
