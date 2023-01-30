@@ -1,10 +1,10 @@
 pipeline {
-    environment { 
+  //  environment { 
       
        //  CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
        
 
-    }
+    //}
     agent any
     tools{
      nodejs 'NODEJS'
