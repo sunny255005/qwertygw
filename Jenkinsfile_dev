@@ -1,19 +1,4 @@
-pipeline {
-    environment { 
-      
-         CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
-       
-
-    }
-    agent any
-    tools{
-     nodejs 'NODEJS'
-    }
-    stages {
-        stage('Which environment to build?') {
-            steps {
-                script {
-                    def userInput = input(id: 'userInput', message: 'Deploy to?',
+,
                     parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'Development', 
                         description:'Environment choices', name:'denv', choices: "Development\nProduction\nTesting"]
                     ])
