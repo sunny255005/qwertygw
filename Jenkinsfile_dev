@@ -1,4 +1,19 @@
-,
+pipeline {
+    environment { 
+      
+         CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
+       
+
+    }
+    agent any
+    tools{
+     nodejs 'NODEJS'
+    }
+    stages {
+        stage('Which environment to build?') {
+            steps {
+                script {
+                    def userInput = input(id: 'userInput', message: 'Deploy to?',
                     parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'Development', 
                         description:'Environment choices', name:'denv', choices: "Development\nProduction\nTesting"]
                     ])
@@ -54,29 +69,7 @@
         }
         }
 
-        stage("Sonarqube")
-        {
-            steps {
-                script{
-//             sh 'sonarqube-server \
-//   -Dsonar.projectKey=qwerty \
-//   -Dsonar.sources=. \
-//   -Dsonar.host.url=http://localhost:9000 \
-//   -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
-
-withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token'){
-                    
-
-                     
-                     sh'sonarqube-server  -Dsonar.projectKey=qwerty  -Dsonar.sources=.  -Dsonar.host.url=http://localhost:9000  -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
-                    
-                }
-            }
-
-        }
-
-
-
+    
 
          stage('Confirm for Sonarqube Check') {
             steps {
@@ -143,4 +136,4 @@ withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube
         
         
     }
-}}
+}
