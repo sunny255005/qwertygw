@@ -158,4 +158,4 @@ withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube
         
         
     }
-}
+}}
