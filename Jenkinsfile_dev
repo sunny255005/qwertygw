@@ -97,11 +97,11 @@ pipeline {
          echo "Hello,sonarqube continue...!"
             script {
                
-    withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonarqube-secret-token') {
+    withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'souradip_sonar_token') {
                     
  
 
- sh 'sonar-4.7 \
+ sh 'sonarqube-server \
   -Dsonar.projectKey=qwerty \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
