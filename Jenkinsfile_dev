@@ -72,10 +72,11 @@ pipeline {
         stage("Sonarqube")
         {
             steps {
-           sonarqube-4.7 \
+            sh 'sonar-scanner \
   -Dsonar.projectKey=qwerty \
+  -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e
+  -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
         }
         } 
         
