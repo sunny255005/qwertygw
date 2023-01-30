@@ -8,6 +8,7 @@ pipeline {
     agent any
     tools{
      nodejs 'NODEJS'
+     sonarQube 'SonarQube Scanner 4.7.0.2747'
     }
     stages {
         stage('Which environment to build?') {
@@ -97,14 +98,14 @@ pipeline {
          echo "Hello,sonarqube continue...!"
             script {
                
-    withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'souradip_sonar_token') {
+    withSonarQubeEnv('sonarqube-server') {
                     
- 
+ sh 'sonar-scanner'
 
- sh ' -Dsonar.projectKey=qwerty \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
+ //sh ' -Dsonar.projectKey=qwerty \
+  //-Dsonar.sources=. \
+  //-Dsonar.host.url=http://localhost:9000 \
+  //-Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e'
                    
                     
                 }
