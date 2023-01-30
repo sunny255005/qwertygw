@@ -1,7 +1,7 @@
 pipeline {
     environment { 
       
-         CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
+       //  CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
        
 
     }
@@ -60,9 +60,11 @@ pipeline {
                   echo "Current workspace is ${env.WORKSPACE}"
                  
                 sh 'npm i jest superset'
-                sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
+               // sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
+                
+                sh 'export CONFIG_FILE_PATH='+env.WORKSPACE+'/local.json'
                 sh 'npx jest --forceExit'
-                echo 'testing in progess...'
+                echo 'testing in progress...'
                 
             }
         }
