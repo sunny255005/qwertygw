@@ -1,23 +1,8 @@
 pipeline {
     environment { 
-        registryCredential = 'docker_nexus'
-        GIT_REPO_NAME = GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1') 
-        dockerImg = ""
-        ecr_registry = "817969892253.dkr.ecr.us-west-2.amazonaws.com"
-        ecr_cred = 'ecr:us-west-2:ecr_cred'
-        ecr_eks = 'aws:us-west-2:ecr_eks'
-        // eks_cred = 'eks-manager'
-        eks_url = 'https://C2C0AC336FF98838305F8AE6CA78639A.gr7.us-west-2.eks.amazonaws.com'
-        imageSedReplace = "${ecr_registry}/${GIT_REPO_NAME}:${GIT_COMMIT}"
-        kubectlFile = "deployment.yaml"
-        kubectlFile_staging = "deployment_staging.yaml"
-        kubectlFile_prod = "deployment_prod.yaml"
-        kube_cred = "k8s-dev"
-        kube_cred_prod = "k8s-prod"
+      
          CONFIG_FILE_PATH='/var/lib/jenkins/workspace/way-dev_souradip_unit_tests_gen3/config/local.json'
-        PROD_BRANCH = "master"
-        STAGING_BRANCH = "staging"
-        user_env_input = "Development"
+       
 
     }
     agent any
