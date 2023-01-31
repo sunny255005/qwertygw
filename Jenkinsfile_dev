@@ -67,9 +67,14 @@ pipeline {
                // try {
                  // sh "jest --ci"
                 //} finally {
-                  junit checksName: 'Jest Tests', testResults: '**/test-results/test/*.xml'
+                  //junit checksName: 'Jest Tests', testResults: '**/test-results/test/*.xml'
                  //  junit testResults: '**/test-results/test/*.xml', skipPublishingChecks: true
                  //}
+                   post {
+        always {
+          junit 'src/testCoverage/junit.xml'
+        }
+      }
                 
             }
         }
