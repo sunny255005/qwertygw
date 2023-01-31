@@ -67,10 +67,7 @@ pipeline {
                
         }
     }
-      
-            }
-       
-    post {
+     post {
         always{
             xunit (
                 thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
@@ -78,6 +75,10 @@ pipeline {
             
         }
     }
+      
+            }
+       
+   
 
          stage('Confirm for Sonarqube Check') {
             steps {
