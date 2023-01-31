@@ -72,10 +72,10 @@ pipeline {
                  //}
                    //post {
        // always {
-          junit 'src/testCoverage/junit.xml'
+          //junit 'src/testCoverage/junit.xml'
         //}
       //}
-                
+              sh'jest --ci --reporters=default --reporters=jest-junit'
             }
         }
         }
