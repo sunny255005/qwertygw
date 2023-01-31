@@ -64,18 +64,7 @@ pipeline {
                 sh 'echo ${reportPath}'
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
-               // try {
-                 // sh "jest --ci"
-                //} finally {
-                  //junit checksName: 'Jest Tests', testResults: '**/test-results/test/*.xml'
-                 //  junit testResults: '**/test-results/test/*.xml', skipPublishingChecks: true
-                 //}
-                   //post {
-       // always {
-          //junit 'src/testCoverage/junit.xml'
-        //}
-      //}
-            //  sh'jest --ci --reporters=default --reporters=jest-junit'
+      
             }
         }
         }
