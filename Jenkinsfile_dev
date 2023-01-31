@@ -58,7 +58,7 @@ pipeline {
             script {
                   
                 echo "Current workspace is ${env.WORKSPACE}" 
-                sh 'npm i jest superset'
+                sh 'npm i jest superset jest-junit'
                 sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
                 def reportPath = "${WORKSPACE}/target/report"
                 sh 'echo ${reportPath}'
