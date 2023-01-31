@@ -64,11 +64,11 @@ pipeline {
                 sh 'echo ${reportPath}'
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
-                try {
-                  sh "jest --ci"
-                } finally {
+               // try {
+                 // sh "jest --ci"
+                //} finally {
                   junit checksName: 'Jest Tests', testResults: 'junit.xml'
-                 }
+                 //}
                 
             }
         }
