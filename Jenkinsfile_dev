@@ -64,7 +64,7 @@ pipeline {
                 sh 'echo ${reportPath}'
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
-                jsunit testResults: '**/test-results/test/*.xml', skipPublishingChecks: true
+                xunit checksName: '', tools: []
                 
             }
         }
