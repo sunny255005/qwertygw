@@ -60,6 +60,8 @@ pipeline {
                 echo "Current workspace is ${env.WORKSPACE}" 
                 sh 'npm i jest superset'
                 sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
+                def reportPath = "${WORKSPACE}/target/report"
+                sh 'echo reportPath'
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
                 
