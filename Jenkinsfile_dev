@@ -55,8 +55,7 @@ pipeline {
         }
      steps {
          echo "Hello,unit_test continue...!"
-         step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']], tools: [[$class: 'XUnitDotNetTestType', pattern: '*results.xml']]])
-            script {
+             script {
                   
                 echo "Current workspace is ${env.WORKSPACE}" 
                 sh 'npm i jest superset'
@@ -65,7 +64,8 @@ pipeline {
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
                
-                 
+                  step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']], tools: [[$class: 'XUnitDotNetTestType', pattern: '*results.xml']]])
+       
                
         }
     }
