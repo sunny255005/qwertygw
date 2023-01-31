@@ -64,15 +64,20 @@ pipeline {
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
                
-                  step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']], tools: [[$class: 'XUnitDotNetTestType', pattern: '*results.xml']]])
-       
                
         }
     }
       
             }
        
-    
+    post {
+        always{
+            xunit (
+                thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
+                tools: [ BoostTest(pattern: 'boost/*.xml') ])
+            )
+        }
+    }
 
          stage('Confirm for Sonarqube Check') {
             steps {
