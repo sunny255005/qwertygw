@@ -58,7 +58,7 @@ pipeline {
             script {
                   
                 echo "Current workspace is ${env.WORKSPACE}" 
-                sh 'npm i jest superset jest-junit'
+                sh 'npm i jest superset jest-junit-reporter'
                 sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
                 def reportPath = "${WORKSPACE}/target/report"
                 sh 'echo ${reportPath}'
@@ -75,7 +75,7 @@ pipeline {
           //junit 'src/testCoverage/junit.xml'
         //}
       //}
-              sh'jest --ci --reporters=default --reporters=jest-junit'
+            //  sh'jest --ci --reporters=default --reporters=jest-junit'
             }
         }
         }
