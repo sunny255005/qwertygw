@@ -3,7 +3,11 @@ pipeline {
     agent any
     tools{
      nodejs 'NODEJS'
+     
   
+    }
+    environments{
+    CONFIG_FILE_PATH=env.WORKSPACE+'/config/local.json'
     }
     stages {
         stage('Which environment to build?') {
@@ -55,7 +59,7 @@ pipeline {
                   
                 echo "Current workspace is ${env.WORKSPACE}" 
                 sh 'npm i jest superset'
-                sh 'export CONFIG_FILE_PATH='+env.WORKSPACE+'/local.json'
+                sh 'export CONFIG_FILE_PATH=${CONFIG_FILE_PATH}'
                 sh 'npx jest --forceExit'
                 echo 'testing in progress...'
                 
