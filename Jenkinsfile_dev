@@ -70,11 +70,11 @@ pipeline {
                   //junit checksName: 'Jest Tests', testResults: '**/test-results/test/*.xml'
                  //  junit testResults: '**/test-results/test/*.xml', skipPublishingChecks: true
                  //}
-                   post {
-        always {
+                   //post {
+       // always {
           junit 'src/testCoverage/junit.xml'
-        }
-      }
+        //}
+      //}
                 
             }
         }
