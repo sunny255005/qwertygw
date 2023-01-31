@@ -7,7 +7,7 @@ pipeline {
   
     }
     environment{
-    CONFIG_FILE_PATH='${env.WORKSPACE}/config/local.json'
+    CONFIG_FILE_PATH="${WORKSPACE}/config/local.json"
     }
     stages {
         stage('Which environment to build?') {
