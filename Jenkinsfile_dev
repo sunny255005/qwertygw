@@ -63,7 +63,6 @@ pipeline {
                
                 sh 'npx jest --coverage --forceExit'
                 echo 'testing in progress...'
-                
                  step([$class: 'XUnitPublisher', testTimeMargin: '3000', thresholdMode:
     2,
     thresholds: [
@@ -74,14 +73,13 @@ pipeline {
      [$class: 'XUnitDotNetTestType', deleteOutputFiles: true, failIfNotNew: true, pattern: '\\**\\unittests-results.xml', skipNoTestFiles: false, stopProcessingIfError: true]
     ]
    ])
+                 
                
         }
     }
       
             }
-        }
-        }
-
+       
     
 
          stage('Confirm for Sonarqube Check') {
