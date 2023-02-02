@@ -100,7 +100,7 @@ pipeline {
             script {
                scannerHome = tool 'SonarQube Scanner 4.7.0.2747'
     withSonarQubeEnv(installationName:'sonarqube-server', credentialsId: 'souradip_sonar_token') {
-                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=qwerty -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e -Dsonar.exclusions=**${WORKSPACE}/coverage/**/*"
+                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=qwerty -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_e605b3ce09f7c600e45623c2fea55399011c9a3e -Dsonar.exclusions=${WORKSPACE}/coverage/**/*.* "
  
                    
                     
